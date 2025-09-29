@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { type DialogProps } from '@radix-ui/react-dialog';</p>
+<p class="p1">import { Command as CommandPrimitive } from 'cmdk';</p>
+<p class="p1">import { Search } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p1">import { Dialog, DialogContent } from '@/components/ui/dialog';</p>
+<p class="p2"><br></p>
+<p class="p1">const Command = React.forwardRef&lt;React.ElementRef&lt;typeof CommandPrimitive&gt;, React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;CommandPrimitive</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn('flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground', className)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>)</p>
+<p class="p1">);</p>
+<p class="p1">Command.displayName = CommandPrimitive.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandDialog = ({ children, ...props }: DialogProps) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Dialog {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DialogContent className="overflow-hidden p-0 shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Command className="[&amp;_[cmdk-group-heading]]:px-2 [&amp;_[cmdk-group-heading]]:font-medium [&amp;_[cmdk-group-heading]]:text-muted-foreground [&amp;_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&amp;_[cmdk-group]]:px-2 [&amp;_[cmdk-input-wrapper]_svg]:h-5 [&amp;_[cmdk-input-wrapper]_svg]:w-5 [&amp;_[cmdk-input]]:h-12 [&amp;_[cmdk-item]]:px-2 [&amp;_[cmdk-item]]:py-3 [&amp;_[cmdk-item]_svg]:h-5 [&amp;_[cmdk-item]_svg]:w-5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/Command&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/DialogContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Dialog&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandInput = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof CommandPrimitive.Input&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive.Input&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className="flex items-center border-b px-3" cmdk-input-wrapper=""&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Search className="mr-2 h-4 w-4 shrink-0 opacity-50" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;CommandPrimitive.Input</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">));</p>
+<p class="p2"><br></p>
+<p class="p1">CommandInput.displayName = CommandPrimitive.Input.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandList = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof CommandPrimitive.List&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive.List&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;CommandPrimitive.List ref={ref} className={cn('max-h-[300px] overflow-y-auto overflow-x-hidden', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p2"><br></p>
+<p class="p1">CommandList.displayName = CommandPrimitive.List.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandEmpty = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof CommandPrimitive.Empty&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive.Empty&gt;</p>
+<p class="p1">&gt;((props, ref) =&gt; &lt;CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} /&gt;);</p>
+<p class="p2"><br></p>
+<p class="p1">CommandEmpty.displayName = CommandPrimitive.Empty.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandGroup = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof CommandPrimitive.Group&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive.Group&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;CommandPrimitive.Group</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'overflow-hidden p-1 text-foreground [&amp;_[cmdk-group-heading]]:px-2 [&amp;_[cmdk-group-heading]]:py-1.5 [&amp;_[cmdk-group-heading]]:text-xs [&amp;_[cmdk-group-heading]]:font-medium [&amp;_[cmdk-group-heading]]:text-muted-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p2"><br></p>
+<p class="p1">CommandGroup.displayName = CommandPrimitive.Group.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandSeparator = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof CommandPrimitive.Separator&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive.Separator&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; &lt;CommandPrimitive.Separator ref={ref} className={cn('-mx-1 h-px bg-border', className)} {...props} /&gt;);</p>
+<p class="p1">CommandSeparator.displayName = CommandPrimitive.Separator.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof CommandPrimitive.Item&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof CommandPrimitive.Item&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;CommandPrimitive.Item</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p2"><br></p>
+<p class="p1">CommandItem.displayName = CommandPrimitive.Item.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const CommandShortcut = ({ className, ...props }: React.HTMLAttributes&lt;HTMLSpanElement&gt;) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;span className={cn('ml-auto text-xs tracking-widest text-muted-foreground', className)} {...props} /&gt;;</p>
+<p class="p1">};</p>
+<p class="p1">CommandShortcut.displayName = 'CommandShortcut';</p>
+<p class="p2"><br></p>
+<p class="p1">export { Command, CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator };</p>
+</body>
+</html>

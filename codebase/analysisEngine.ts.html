@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { Startup } from './mockData';</p>
+<p class="p2"><br></p>
+<p class="p1">export interface AnalysisInput {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>companyName: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>industry: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>stage: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>foundedYear: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>founders: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>description: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>website?: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>fundingRaised: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>employees: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>location: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pitchDeck?: File;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>financialData?: File;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>additionalInfo?: string;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export const analyzeStartup = (input: AnalysisInput): Startup =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Mock AI analysis - in real implementation, this would call AI APIs</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const marketScore = Math.random() * 3 + 7; // 7-10 range</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const teamScore = Math.random() * 3 + 6.5; // 6.5-9.5 range</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const productScore = Math.random() * 3 + 6; // 6-9 range</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const financialScore = Math.random() * 4 + 5; // 5-9 range</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const overallScore = (marketScore + teamScore + productScore + financialScore) / 4;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Determine risk level based on stage and scores</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let riskLevel: 'Low' | 'Medium' | 'High';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.stage === 'Series B' || input.stage === 'Series C') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel = overallScore &gt; 8 ? 'Low' : 'Medium';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else if (input.stage === 'Series A') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel = overallScore &gt; 7.5 ? 'Medium' : 'High';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel = overallScore &gt; 8 ? 'Medium' : 'High';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Determine recommendation</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let recommendation: 'Strong Buy' | 'Buy' | 'Hold' | 'Pass';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (overallScore &gt;= 8.5) recommendation = 'Strong Buy';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>else if (overallScore &gt;= 7.5) recommendation = 'Buy';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>else if (overallScore &gt;= 6.5) recommendation = 'Hold';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>else recommendation = 'Pass';</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Generate insights based on industry and stage</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const keyInsights = generateInsights(input, overallScore);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const concerns = generateConcerns(input, riskLevel);</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>id: Date.now().toString(),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: input.companyName,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>industry: input.industry,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stage: input.stage,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>foundedYear: input.foundedYear,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>founders: input.founders.split(',').map(f =&gt; f.trim()),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>description: input.description,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>website: input.website,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fundingRaised: input.fundingRaised,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>employees: input.employees,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>location: input.location,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>analysisDate: new Date().toISOString().split('T')[0],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overallScore: Math.round(overallScore * 10) / 10,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>marketScore: Math.round(marketScore * 10) / 10,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>teamScore: Math.round(teamScore * 10) / 10,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>productScore: Math.round(productScore * 10) / 10,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>financialScore: Math.round(financialScore * 10) / 10,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recommendation,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>keyInsights,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const generateInsights = (input: AnalysisInput, score: number): string[] =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const insights = [];</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (score &gt; 8) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insights.push('Strong overall performance across all metrics');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.stage === 'Series A' || input.stage === 'Series B') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insights.push('Mature funding stage indicates proven business model');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.fundingRaised &gt; 10000000) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insights.push('Significant funding raised demonstrates investor confidence');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.employees &gt; 50) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insights.push('Substantial team size indicates scaling operations');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Industry-specific insights</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.industry.toLowerCase().includes('ai') || input.industry.toLowerCase().includes('artificial')) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insights.push('Operating in high-growth AI market with significant potential');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.industry.toLowerCase().includes('health')) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>insights.push('Healthcare sector offers large addressable market opportunities');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return insights.slice(0, 4); // Limit to 4 insights</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const generateConcerns = (input: AnalysisInput, riskLevel: string): string[] =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const concerns = [];</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (riskLevel === 'High') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns.push('High risk profile requires careful monitoring');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.stage === 'Seed' || input.stage === 'Pre-Seed') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns.push('Early stage with limited market validation');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.employees &lt; 10) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns.push('Small team size may limit execution capacity');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.fundingRaised &lt; 1000000) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns.push('Limited funding may constrain growth opportunities');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Industry-specific concerns</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (input.industry.toLowerCase().includes('health')) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns.push('Healthcare regulations may impact time to market');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return concerns.slice(0, 3); // Limit to 3 concerns</p>
+<p class="p1">};</p>
+</body>
+</html>

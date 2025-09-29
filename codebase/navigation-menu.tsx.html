@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';</p>
+<p class="p1">import { cva } from 'class-variance-authority';</p>
+<p class="p1">import { ChevronDown } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenu = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof NavigationMenuPrimitive.Root&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof NavigationMenuPrimitive.Root&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;NavigationMenuPrimitive.Root</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('relative z-10 flex max-w-max flex-1 items-center justify-center', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;NavigationMenuViewport /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/NavigationMenuPrimitive.Root&gt;</p>
+<p class="p1">));</p>
+<p class="p1">NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuList = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof NavigationMenuPrimitive.List&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof NavigationMenuPrimitive.List&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;NavigationMenuPrimitive.List</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('group flex flex-1 list-none items-center justify-center space-x-1', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuItem = NavigationMenuPrimitive.Item;</p>
+<p class="p2"><br></p>
+<p class="p1">const navigationMenuTriggerStyle = cva(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuTrigger = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof NavigationMenuPrimitive.Trigger&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof NavigationMenuPrimitive.Trigger&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;NavigationMenuPrimitive.Trigger ref={ref} className={cn(navigationMenuTriggerStyle(), 'group', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}{' '}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChevronDown</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>aria-hidden="true"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/NavigationMenuPrimitive.Trigger&gt;</p>
+<p class="p1">));</p>
+<p class="p1">NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof NavigationMenuPrimitive.Content&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof NavigationMenuPrimitive.Content&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;NavigationMenuPrimitive.Content</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto ',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuLink = NavigationMenuPrimitive.Link;</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuViewport = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof NavigationMenuPrimitive.Viewport&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof NavigationMenuPrimitive.Viewport&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className={cn('absolute left-0 top-full flex justify-center')}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;NavigationMenuPrimitive.Viewport</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">));</p>
+<p class="p1">NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const NavigationMenuIndicator = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof NavigationMenuPrimitive.Indicator&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof NavigationMenuPrimitive.Indicator&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;NavigationMenuPrimitive.Indicator</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/NavigationMenuPrimitive.Indicator&gt;</p>
+<p class="p1">));</p>
+<p class="p1">NavigationMenuIndicator.displayName = NavigationMenuPrimitive.Indicator.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>navigationMenuTriggerStyle,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenu,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuList,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuLink,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuIndicator,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>NavigationMenuViewport,</p>
+<p class="p1">};</p>
+</body>
+</html>

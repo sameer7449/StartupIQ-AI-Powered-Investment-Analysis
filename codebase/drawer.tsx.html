@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { Drawer as DrawerPrimitive } from 'vaul';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const Drawer = ({ shouldScaleBackground = true, ...props }: React.ComponentProps&lt;typeof DrawerPrimitive.Root&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">Drawer.displayName = 'Drawer';</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerTrigger = DrawerPrimitive.Trigger;</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerPortal = DrawerPrimitive.Portal;</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerClose = DrawerPrimitive.Close;</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerOverlay = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DrawerPrimitive.Overlay&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DrawerPrimitive.Overlay&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DrawerPrimitive.Overlay ref={ref} className={cn('fixed inset-0 z-50 bg-black/80', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DrawerPrimitive.Content&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DrawerPrimitive.Content&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DrawerPortal&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;DrawerOverlay /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;DrawerPrimitive.Content</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn('fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background', className)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/DrawerPrimitive.Content&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/DrawerPortal&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DrawerContent.displayName = 'DrawerContent';</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerHeader = ({ className, ...props }: React.HTMLAttributes&lt;HTMLDivElement&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className={cn('grid gap-1.5 p-4 text-center sm:text-left', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">DrawerHeader.displayName = 'DrawerHeader';</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerFooter = ({ className, ...props }: React.HTMLAttributes&lt;HTMLDivElement&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className={cn('mt-auto flex flex-col gap-2 p-4', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">DrawerFooter.displayName = 'DrawerFooter';</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerTitle = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DrawerPrimitive.Title&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DrawerPrimitive.Title&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DrawerPrimitive.Title ref={ref} className={cn('text-lg font-semibold leading-none tracking-tight', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DrawerTitle.displayName = DrawerPrimitive.Title.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DrawerDescription = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DrawerPrimitive.Description&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DrawerPrimitive.Description&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DrawerPrimitive.Description ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DrawerDescription.displayName = DrawerPrimitive.Description.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Drawer,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerPortal,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerOverlay,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerClose,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerHeader,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerFooter,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerTitle,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DrawerDescription,</p>
+<p class="p1">};</p>
+</body>
+</html>

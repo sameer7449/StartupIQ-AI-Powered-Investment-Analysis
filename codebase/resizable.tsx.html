@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { GripVertical } from 'lucide-react';</p>
+<p class="p1">import * as ResizablePrimitive from 'react-resizable-panels';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const ResizablePanelGroup = ({ className, ...props }: React.ComponentProps&lt;typeof ResizablePrimitive.PanelGroup&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ResizablePrimitive.PanelGroup</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('flex h-full w-full data-[panel-group-direction=vertical]:flex-col', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">const ResizablePanel = ResizablePrimitive.Panel;</p>
+<p class="p2"><br></p>
+<p class="p1">const ResizableHandle = ({</p>
+<p class="p1"><span class="Apple-converted-space">  </span>withHandle,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>className,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>...props</p>
+<p class="p1">}: React.ComponentProps&lt;typeof ResizablePrimitive.PanelResizeHandle&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>withHandle?: boolean;</p>
+<p class="p1">}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ResizablePrimitive.PanelResizeHandle</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex w-px items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0 [&amp;[data-panel-group-direction=vertical]&gt;div]:rotate-90',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{withHandle &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;GripVertical className="h-2.5 w-2.5" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ResizablePrimitive.PanelResizeHandle&gt;</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">export { ResizablePanelGroup, ResizablePanel, ResizableHandle };</p>
+</body>
+</html>

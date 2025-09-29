@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { Slot } from '@radix-ui/react-slot';</p>
+<p class="p1">import { ChevronRight, MoreHorizontal } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const Breadcrumb = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;'nav'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>separator?: React.ReactNode;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ ...props }, ref) =&gt; &lt;nav ref={ref} aria-label="breadcrumb" {...props} /&gt;);</p>
+<p class="p1">Breadcrumb.displayName = 'Breadcrumb';</p>
+<p class="p2"><br></p>
+<p class="p1">const BreadcrumbList = React.forwardRef&lt;HTMLOListElement, React.ComponentPropsWithoutRef&lt;'ol'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ol</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">BreadcrumbList.displayName = 'BreadcrumbList';</p>
+<p class="p2"><br></p>
+<p class="p1">const BreadcrumbItem = React.forwardRef&lt;HTMLLIElement, React.ComponentPropsWithoutRef&lt;'li'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;li ref={ref} className={cn('inline-flex items-center gap-1.5', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">BreadcrumbItem.displayName = 'BreadcrumbItem';</p>
+<p class="p2"><br></p>
+<p class="p1">const BreadcrumbLink = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLAnchorElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;'a'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>asChild?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ asChild, className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const Comp = asChild ? Slot : 'a';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;Comp ref={ref} className={cn('transition-colors hover:text-foreground', className)} {...props} /&gt;;</p>
+<p class="p1">});</p>
+<p class="p1">BreadcrumbLink.displayName = 'BreadcrumbLink';</p>
+<p class="p2"><br></p>
+<p class="p1">const BreadcrumbPage = React.forwardRef&lt;HTMLSpanElement, React.ComponentPropsWithoutRef&lt;'span'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>role="link"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>aria-disabled="true"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>aria-current="page"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('font-normal text-foreground', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">BreadcrumbPage.displayName = 'BreadcrumbPage';</p>
+<p class="p2"><br></p>
+<p class="p1">const BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps&lt;'li'&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;li role="presentation" aria-hidden="true" className={cn('[&amp;&gt;svg]:size-3.5', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children ?? &lt;ChevronRight /&gt;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/li&gt;</p>
+<p class="p1">);</p>
+<p class="p1">BreadcrumbSeparator.displayName = 'BreadcrumbSeparator';</p>
+<p class="p2"><br></p>
+<p class="p1">const BreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps&lt;'span'&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span role="presentation" aria-hidden="true" className={cn('flex h-9 w-9 items-center justify-center', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;MoreHorizontal className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="sr-only"&gt;More&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/span&gt;</p>
+<p class="p1">);</p>
+<p class="p1">BreadcrumbEllipsis.displayName = 'BreadcrumbElipssis';</p>
+<p class="p2"><br></p>
+<p class="p1">export { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis };</p>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { Slot } from '@radix-ui/react-slot';</p>
+<p class="p1">import { cva, type VariantProps } from 'class-variance-authority';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const buttonVariants = cva(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>variants: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>variant: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>default: 'bg-primary text-primary-foreground hover:bg-primary/90',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ghost: 'hover:bg-accent hover:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>link: 'text-primary underline-offset-4 hover:underline',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>size: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>default: 'h-10 px-4 py-2',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sm: 'h-9 rounded-md px-3',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lg: 'h-11 rounded-md px-8',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>icon: 'h-10 w-10',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>defaultVariants: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>variant: 'default',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>size: 'default',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">export interface ButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;, VariantProps&lt;typeof buttonVariants&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>asChild?: boolean;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(({ className, variant, size, asChild = false, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const Comp = asChild ? Slot : 'button';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} /&gt;;</p>
+<p class="p1">});</p>
+<p class="p1">Button.displayName = 'Button';</p>
+<p class="p2"><br></p>
+<p class="p1">export { Button, buttonVariants };</p>
+</body>
+</html>

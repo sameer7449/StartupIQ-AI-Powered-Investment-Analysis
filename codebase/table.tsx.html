@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const Table = React.forwardRef&lt;HTMLTableElement, React.HTMLAttributes&lt;HTMLTableElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className="relative w-full overflow-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">));</p>
+<p class="p1">Table.displayName = 'Table';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableHeader = React.forwardRef&lt;HTMLTableSectionElement, React.HTMLAttributes&lt;HTMLTableSectionElement&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; &lt;thead ref={ref} className={cn('[&amp;_tr]:border-b', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">TableHeader.displayName = 'TableHeader';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableBody = React.forwardRef&lt;HTMLTableSectionElement, React.HTMLAttributes&lt;HTMLTableSectionElement&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; &lt;tbody ref={ref} className={cn('[&amp;_tr:last-child]:border-0', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">TableBody.displayName = 'TableBody';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableFooter = React.forwardRef&lt;HTMLTableSectionElement, React.HTMLAttributes&lt;HTMLTableSectionElement&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;tfoot ref={ref} className={cn('border-t bg-muted/50 font-medium [&amp;&gt;tr]:last:border-b-0', className)} {...props} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>)</p>
+<p class="p1">);</p>
+<p class="p1">TableFooter.displayName = 'TableFooter';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableRow = React.forwardRef&lt;HTMLTableRowElement, React.HTMLAttributes&lt;HTMLTableRowElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;tr ref={ref} className={cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">TableRow.displayName = 'TableRow';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableHead = React.forwardRef&lt;HTMLTableCellElement, React.ThHTMLAttributes&lt;HTMLTableCellElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;th</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">TableHead.displayName = 'TableHead';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableCell = React.forwardRef&lt;HTMLTableCellElement, React.TdHTMLAttributes&lt;HTMLTableCellElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;td ref={ref} className={cn('p-4 align-middle [&amp;:has([role=checkbox])]:pr-0', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">TableCell.displayName = 'TableCell';</p>
+<p class="p2"><br></p>
+<p class="p1">const TableCaption = React.forwardRef&lt;HTMLTableCaptionElement, React.HTMLAttributes&lt;HTMLTableCaptionElement&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; &lt;caption ref={ref} className={cn('mt-4 text-sm text-muted-foreground', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">TableCaption.displayName = 'TableCaption';</p>
+<p class="p2"><br></p>
+<p class="p1">export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };</p>
+</body>
+</html>

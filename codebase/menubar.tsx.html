@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as MenubarPrimitive from '@radix-ui/react-menubar';</p>
+<p class="p1">import { Check, ChevronRight, Circle } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarMenu = MenubarPrimitive.Menu;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarGroup = MenubarPrimitive.Group;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarPortal = MenubarPrimitive.Portal;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarSub = MenubarPrimitive.Sub;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarRadioGroup = MenubarPrimitive.RadioGroup;</p>
+<p class="p2"><br></p>
+<p class="p1">const Menubar = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.Root&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.Root&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.Root</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('flex h-10 items-center space-x-1 rounded-md border bg-background p-1', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">Menubar.displayName = MenubarPrimitive.Root.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarTrigger = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.Trigger&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.Trigger&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.Trigger</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'flex cursor-default select-none items-center rounded-sm px-3 py-1.5 text-sm font-medium outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarTrigger.displayName = MenubarPrimitive.Trigger.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarSubTrigger = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.SubTrigger&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.SubTrigger&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.SubTrigger</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset &amp;&amp; 'pl-8',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChevronRight className="ml-auto h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/MenubarPrimitive.SubTrigger&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarSubTrigger.displayName = MenubarPrimitive.SubTrigger.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarSubContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.SubContent&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.SubContent&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.SubContent</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarSubContent.displayName = MenubarPrimitive.SubContent.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.Content&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.Content&gt;</p>
+<p class="p1">&gt;(({ className, align = 'start', alignOffset = -4, sideOffset = 8, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.Portal&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;MenubarPrimitive.Content</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align={align}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>alignOffset={alignOffset}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sideOffset={sideOffset}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'z-50 min-w-[12rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/MenubarPrimitive.Portal&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarContent.displayName = MenubarPrimitive.Content.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.Item&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.Item&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.Item</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset &amp;&amp; 'pl-8',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarItem.displayName = MenubarPrimitive.Item.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarCheckboxItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.CheckboxItem&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.CheckboxItem&gt;</p>
+<p class="p1">&gt;(({ className, children, checked, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.CheckboxItem</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>checked={checked}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;MenubarPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Check className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/MenubarPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/MenubarPrimitive.CheckboxItem&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarCheckboxItem.displayName = MenubarPrimitive.CheckboxItem.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarRadioItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.RadioItem&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.RadioItem&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.RadioItem</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;MenubarPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Circle className="h-2 w-2 fill-current" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/MenubarPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/MenubarPrimitive.RadioItem&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarRadioItem.displayName = MenubarPrimitive.RadioItem.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarLabel = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.Label&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.Label&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.Label ref={ref} className={cn('px-2 py-1.5 text-sm font-semibold', inset &amp;&amp; 'pl-8', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarLabel.displayName = MenubarPrimitive.Label.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarSeparator = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof MenubarPrimitive.Separator&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof MenubarPrimitive.Separator&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;MenubarPrimitive.Separator ref={ref} className={cn('-mx-1 my-1 h-px bg-muted', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">MenubarSeparator.displayName = MenubarPrimitive.Separator.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const MenubarShortcut = ({ className, ...props }: React.HTMLAttributes&lt;HTMLSpanElement&gt;) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;span className={cn('ml-auto text-xs tracking-widest text-muted-foreground', className)} {...props} /&gt;;</p>
+<p class="p1">};</p>
+<p class="p1">MenubarShortcut.displayname = 'MenubarShortcut';</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Menubar,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarMenu,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarSeparator,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarLabel,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarCheckboxItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarRadioGroup,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarRadioItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarPortal,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarSubContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarSubTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarGroup,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarSub,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>MenubarShortcut,</p>
+<p class="p1">};</p>
+</body>
+</html>

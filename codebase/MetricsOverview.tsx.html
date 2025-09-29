@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';</p>
+<p class="p1">import { TrendingUp, Users, DollarSign, Award, Building, BarChart3 } from 'lucide-react';</p>
+<p class="p1">import { dashboardMetrics } from '@/lib/mockData';</p>
+<p class="p2"><br></p>
+<p class="p1">export default function MetricsOverview() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardTitle className="text-sm font-medium"&gt;Total Startups Analyzed&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;Building className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-2xl font-bold"&gt;{dashboardMetrics.totalStartupsAnalyzed}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>+{dashboardMetrics.monthlyGrowth}% from last month</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardTitle className="text-sm font-medium"&gt;Average Score&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;BarChart3 className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-2xl font-bold"&gt;{dashboardMetrics.averageScore}/10&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Across all analyzed startups</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardTitle className="text-sm font-medium"&gt;Strong Buy Recommendations&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;Award className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-2xl font-bold"&gt;{dashboardMetrics.strongBuyRecommendations}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>High-confidence investment opportunities</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardTitle className="text-sm font-medium"&gt;Total Funding Analyzed&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;DollarSign className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-2xl font-bold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${(dashboardMetrics.totalFundingAnalyzed / 1000000000).toFixed(1)}B</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Cumulative funding across portfolio</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardTitle className="text-sm font-medium"&gt;Top Performing Industry&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TrendingUp className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-2xl font-bold"&gt;{dashboardMetrics.topPerformingIndustry}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Highest average scores</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardTitle className="text-sm font-medium"&gt;Analysis Growth&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;Users className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="text-2xl font-bold"&gt;+{dashboardMetrics.monthlyGrowth}%&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Month-over-month growth</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+</body>
+</html>

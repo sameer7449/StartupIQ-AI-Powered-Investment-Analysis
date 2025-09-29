@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p1">import { ButtonProps, buttonVariants } from '@/components/ui/button';</p>
+<p class="p2"><br></p>
+<p class="p1">const Pagination = ({ className, ...props }: React.ComponentProps&lt;'nav'&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav role="navigation" aria-label="pagination" className={cn('mx-auto flex w-full justify-center', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">Pagination.displayName = 'Pagination';</p>
+<p class="p2"><br></p>
+<p class="p1">const PaginationContent = React.forwardRef&lt;HTMLUListElement, React.ComponentProps&lt;'ul'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ul ref={ref} className={cn('flex flex-row items-center gap-1', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">PaginationContent.displayName = 'PaginationContent';</p>
+<p class="p2"><br></p>
+<p class="p1">const PaginationItem = React.forwardRef&lt;HTMLLIElement, React.ComponentProps&lt;'li'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;li ref={ref} className={cn('', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">PaginationItem.displayName = 'PaginationItem';</p>
+<p class="p2"><br></p>
+<p class="p1">type PaginationLinkProps = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>isActive?: boolean;</p>
+<p class="p1">} &amp; Pick&lt;ButtonProps, 'size'&gt; &amp;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'a'&gt;;</p>
+<p class="p2"><br></p>
+<p class="p1">const PaginationLink = ({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;a</p>
+<p class="p1"><span class="Apple-converted-space">    </span>aria-current={isActive ? 'page' : undefined}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>buttonVariants({</p>
+<p class="p1"><span class="Apple-converted-space">        </span>variant: isActive ? 'outline' : 'ghost',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>size,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">);</p>
+<p class="p1">PaginationLink.displayName = 'PaginationLink';</p>
+<p class="p2"><br></p>
+<p class="p1">const PaginationPrevious = ({ className, ...props }: React.ComponentProps&lt;typeof PaginationLink&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;PaginationLink aria-label="Go to previous page" size="default" className={cn('gap-1 pl-2.5', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChevronLeft className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;Previous&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/PaginationLink&gt;</p>
+<p class="p1">);</p>
+<p class="p1">PaginationPrevious.displayName = 'PaginationPrevious';</p>
+<p class="p2"><br></p>
+<p class="p1">const PaginationNext = ({ className, ...props }: React.ComponentProps&lt;typeof PaginationLink&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;PaginationLink aria-label="Go to next page" size="default" className={cn('gap-1 pr-2.5', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span&gt;Next&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChevronRight className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/PaginationLink&gt;</p>
+<p class="p1">);</p>
+<p class="p1">PaginationNext.displayName = 'PaginationNext';</p>
+<p class="p2"><br></p>
+<p class="p1">const PaginationEllipsis = ({ className, ...props }: React.ComponentProps&lt;'span'&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span aria-hidden className={cn('flex h-9 w-9 items-center justify-center', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;MoreHorizontal className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="sr-only"&gt;More pages&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/span&gt;</p>
+<p class="p1">);</p>
+<p class="p1">PaginationEllipsis.displayName = 'PaginationEllipsis';</p>
+<p class="p2"><br></p>
+<p class="p1">export { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious };</p>
+</body>
+</html>

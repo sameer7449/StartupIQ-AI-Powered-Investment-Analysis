@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as DialogPrimitive from '@radix-ui/react-dialog';</p>
+<p class="p1">import { X } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const Dialog = DialogPrimitive.Root;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogTrigger = DialogPrimitive.Trigger;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogPortal = DialogPrimitive.Portal;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogClose = DialogPrimitive.Close;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogOverlay = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DialogPrimitive.Overlay&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DialogPrimitive.Overlay&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DialogPrimitive.Overlay</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'fixed inset-0 z-50 bg-black/80<span class="Apple-converted-space">  </span>data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DialogPrimitive.Content&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DialogPrimitive.Content&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DialogPortal&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;DialogOverlay /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;DialogPrimitive.Content</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;X className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span className="sr-only"&gt;Close&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/DialogPrimitive.Close&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/DialogPrimitive.Content&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/DialogPortal&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DialogContent.displayName = DialogPrimitive.Content.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogHeader = ({ className, ...props }: React.HTMLAttributes&lt;HTMLDivElement&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">DialogHeader.displayName = 'DialogHeader';</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogFooter = ({ className, ...props }: React.HTMLAttributes&lt;HTMLDivElement&gt;) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">DialogFooter.displayName = 'DialogFooter';</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogTitle = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DialogPrimitive.Title&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DialogPrimitive.Title&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DialogPrimitive.Title ref={ref} className={cn('text-lg font-semibold leading-none tracking-tight', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DialogTitle.displayName = DialogPrimitive.Title.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DialogDescription = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DialogPrimitive.Description&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DialogPrimitive.Description&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DialogPrimitive.Description ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DialogDescription.displayName = DialogPrimitive.Description.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Dialog,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogPortal,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogOverlay,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogClose,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogHeader,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogFooter,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogTitle,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DialogDescription,</p>
+<p class="p1">};</p>
+</body>
+</html>

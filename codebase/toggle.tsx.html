@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as TogglePrimitive from '@radix-ui/react-toggle';</p>
+<p class="p1">import { cva, type VariantProps } from 'class-variance-authority';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const toggleVariants = cva(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>variants: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>variant: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>default: 'bg-transparent',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>outline: 'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>size: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>default: 'h-10 px-3',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sm: 'h-9 px-2.5',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lg: 'h-11 px-5',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>defaultVariants: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>variant: 'default',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>size: 'default',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">const Toggle = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof TogglePrimitive.Root&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof TogglePrimitive.Root&gt; &amp; VariantProps&lt;typeof toggleVariants&gt;</p>
+<p class="p1">&gt;(({ className, variant, size, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;TogglePrimitive.Root ref={ref} className={cn(toggleVariants({ variant, size, className }))} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p2"><br></p>
+<p class="p1">Toggle.displayName = TogglePrimitive.Root.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">export { Toggle, toggleVariants };</p>
+</body>
+</html>

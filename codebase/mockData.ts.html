@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">export interface Startup {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>id: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>name: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>industry: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>stage: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>foundedYear: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>founders: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>description: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>website?: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>fundingRaised: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>lastFundingRound?: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>employees: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>location: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>analysisDate: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>overallScore: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>marketScore: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>teamScore: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>productScore: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>financialScore: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>riskLevel: 'Low' | 'Medium' | 'High';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>recommendation: 'Strong Buy' | 'Buy' | 'Hold' | 'Pass';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>keyInsights: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>concerns: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>logo?: string;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export const mockStartups: Startup[] = [</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>id: '1',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: 'TechFlow AI',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>industry: 'Artificial Intelligence',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stage: 'Series A',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>foundedYear: 2022,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>founders: ['Sarah Chen', 'Michael Rodriguez'],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>description: 'AI-powered workflow automation platform for enterprise customers',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>website: 'techflow.ai',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fundingRaised: 5200000,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>lastFundingRound: 'Series A',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>employees: 28,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>location: 'San Francisco, CA',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>analysisDate: '2024-01-15',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overallScore: 8.4,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>marketScore: 9.1,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>teamScore: 8.7,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>productScore: 8.2,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>financialScore: 7.6,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel: 'Medium',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recommendation: 'Buy',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>keyInsights: [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Strong product-market fit with 40% month-over-month growth',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Experienced founding team with previous exits',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Large addressable market ($50B+ workflow automation)',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Strong customer retention rate of 95%'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns: [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'High customer acquisition costs',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Competitive landscape with established players'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>id: '2',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: 'GreenEnergy Solutions',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>industry: 'Clean Technology',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stage: 'Seed',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>foundedYear: 2023,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>founders: ['David Park', 'Lisa Thompson', 'Ahmed Hassan'],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>description: 'Solar panel optimization software using machine learning',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fundingRaised: 1800000,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>lastFundingRound: 'Seed',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>employees: 12,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>location: 'Austin, TX',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>analysisDate: '2024-01-10',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overallScore: 7.2,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>marketScore: 8.5,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>teamScore: 7.8,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>productScore: 6.9,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>financialScore: 6.5,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel: 'High',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recommendation: 'Hold',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>keyInsights: [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Addressing growing renewable energy market',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Innovative ML approach to energy optimization',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Strong technical team background'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns: [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Early stage with limited market validation',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Long sales cycles in energy sector',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Regulatory challenges in different markets'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>id: '3',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: 'HealthTrack Pro',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>industry: 'Healthcare Technology',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stage: 'Series B',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>foundedYear: 2021,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>founders: ['Dr. Jennifer Kim', 'Robert Wilson'],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>description: 'Digital health platform for chronic disease management',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>website: 'healthtrackpro.com',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fundingRaised: 15600000,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>lastFundingRound: 'Series B',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>employees: 85,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>location: 'Boston, MA',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>analysisDate: '2024-01-12',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overallScore: 9.1,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>marketScore: 8.8,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>teamScore: 9.3,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>productScore: 9.2,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>financialScore: 8.9,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>riskLevel: 'Low',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>recommendation: 'Strong Buy',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>keyInsights: [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Proven revenue model with $2M+ ARR',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'FDA-approved platform with clinical validation',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Strong partnerships with major health systems',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Experienced healthcare leadership team'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>concerns: [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Healthcare regulation compliance costs',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'Data privacy and security requirements'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">export const dashboardMetrics = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>totalStartupsAnalyzed: 127,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>averageScore: 7.6,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>strongBuyRecommendations: 23,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>totalFundingAnalyzed: 2400000000,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>topPerformingIndustry: 'Healthcare Technology',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>monthlyGrowth: 15.3</p>
+<p class="p1">};</p>
+</body>
+</html>

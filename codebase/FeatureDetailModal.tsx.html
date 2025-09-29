@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';</p>
+<p class="p1">import { TouchButton } from '@/components/TouchButton';</p>
+<p class="p1">import { Badge } from '@/components/ui/badge';</p>
+<p class="p1">import { Progress } from '@/components/ui/progress';</p>
+<p class="p1">import { CheckCircle, ArrowRight, Zap } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">interface FeatureDetail {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>title: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>description: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>benefits: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>technicalSpecs: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useCases: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>metrics: { label: string; value: number }[];</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">interface FeatureDetailModalProps {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>isOpen: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>onClose: () =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>feature: FeatureDetail | null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>onTryFeature?: () =&gt; void;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export default function FeatureDetailModal({<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>isOpen,<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>onClose,<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>feature,<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>onTryFeature<span class="Apple-converted-space"> </span></p>
+<p class="p1">}: FeatureDetailModalProps) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!feature) return null;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Dialog open={isOpen} onOpenChange={onClose}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;DialogHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;DialogTitle className="text-xl md:text-2xl flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;Zap className="h-6 w-6 text-blue-600" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{feature.title}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/DialogTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;DialogDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{feature.description}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/DialogDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/DialogHeader&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* Benefits */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="text-lg font-semibold mb-3"&gt;Key Benefits&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="grid gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{feature.benefits.map((benefit, index) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div key={index} className="flex items-start gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;CheckCircle className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span className="text-sm"&gt;{benefit}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* Technical Specifications */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="text-lg font-semibold mb-3"&gt;Technical Specifications&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="grid gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{feature.technicalSpecs.map((spec, index) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Badge key={index} variant="outline" className="justify-start text-xs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>{spec}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/Badge&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* Use Cases */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="text-lg font-semibold mb-3"&gt;Use Cases&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="grid gap-3 md:grid-cols-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{feature.useCases.map((useCase, index) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div key={index} className="p-3 bg-gray-50 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;p className="text-sm font-medium"&gt;Scenario {index + 1}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;p className="text-xs text-muted-foreground mt-1"&gt;{useCase}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* Performance Metrics */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 className="text-lg font-semibold mb-3"&gt;Performance Metrics&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{feature.metrics.map((metric, index) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div key={index}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex justify-between mb-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="text-sm font-medium"&gt;{metric.label}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span className="text-sm"&gt;{metric.value}%&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;Progress value={metric.value} className="h-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="flex gap-3 pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{onTryFeature &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={onTryFeature}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Try This Feature</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;ArrowRight className="h-4 w-4 ml-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TouchButton onClick={onClose} variant="outline"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Close</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/DialogContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Dialog&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+</body>
+</html>

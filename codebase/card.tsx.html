@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const Card = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} className={cn('rounded-lg border bg-card text-card-foreground shadow-sm', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">Card.displayName = 'Card';</p>
+<p class="p2"><br></p>
+<p class="p1">const CardHeader = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">CardHeader.displayName = 'CardHeader';</p>
+<p class="p2"><br></p>
+<p class="p1">const CardTitle = React.forwardRef&lt;HTMLParagraphElement, React.HTMLAttributes&lt;HTMLHeadingElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h3 ref={ref} className={cn('text-2xl font-semibold leading-none tracking-tight', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">CardTitle.displayName = 'CardTitle';</p>
+<p class="p2"><br></p>
+<p class="p1">const CardDescription = React.forwardRef&lt;HTMLParagraphElement, React.HTMLAttributes&lt;HTMLParagraphElement&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; &lt;p ref={ref} className={cn('text-sm text-muted-foreground', className)} {...props} /&gt;</p>
+<p class="p1">);</p>
+<p class="p1">CardDescription.displayName = 'CardDescription';</p>
+<p class="p2"><br></p>
+<p class="p1">const CardContent = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} className={cn('p-6 pt-0', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">CardContent.displayName = 'CardContent';</p>
+<p class="p2"><br></p>
+<p class="p1">const CardFooter = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} className={cn('flex items-center p-6 pt-0', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">CardFooter.displayName = 'CardFooter';</p>
+<p class="p2"><br></p>
+<p class="p1">export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };</p>
+</body>
+</html>

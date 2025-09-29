@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';</p>
+<p class="p1">import { Check, ChevronRight, Circle } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenu = DropdownMenuPrimitive.Root;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuGroup = DropdownMenuPrimitive.Group;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuPortal = DropdownMenuPrimitive.Portal;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuSub = DropdownMenuPrimitive.Sub;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuSubTrigger = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.SubTrigger&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.SubTrigger&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.SubTrigger</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset &amp;&amp; 'pl-8',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChevronRight className="ml-auto h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/DropdownMenuPrimitive.SubTrigger&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuSubContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.SubContent&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.SubContent&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.SubContent</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.Content&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.Content&gt;</p>
+<p class="p1">&gt;(({ className, sideOffset = 4, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.Portal&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;DropdownMenuPrimitive.Content</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>sideOffset={sideOffset}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/DropdownMenuPrimitive.Portal&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.Item&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.Item&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.Item</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset &amp;&amp; 'pl-8',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuCheckboxItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.CheckboxItem&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.CheckboxItem&gt;</p>
+<p class="p1">&gt;(({ className, children, checked, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.CheckboxItem</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>checked={checked}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DropdownMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Check className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/DropdownMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/DropdownMenuPrimitive.CheckboxItem&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuRadioItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.RadioItem&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.RadioItem&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.RadioItem</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DropdownMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Circle className="h-2 w-2 fill-current" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/DropdownMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/DropdownMenuPrimitive.RadioItem&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuLabel = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.Label&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.Label&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.Label ref={ref} className={cn('px-2 py-1.5 text-sm font-semibold', inset &amp;&amp; 'pl-8', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuSeparator = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof DropdownMenuPrimitive.Separator&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof DropdownMenuPrimitive.Separator&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;DropdownMenuPrimitive.Separator ref={ref} className={cn('-mx-1 my-1 h-px bg-muted', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes&lt;HTMLSpanElement&gt;) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;span className={cn('ml-auto text-xs tracking-widest opacity-60', className)} {...props} /&gt;;</p>
+<p class="p1">};</p>
+<p class="p1">DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenu,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuCheckboxItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuRadioItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuLabel,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuSeparator,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuShortcut,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuGroup,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuPortal,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuSub,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuSubContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuSubTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DropdownMenuRadioGroup,</p>
+<p class="p1">};</p>
+</body>
+</html>

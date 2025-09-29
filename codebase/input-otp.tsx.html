@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { OTPInput, OTPInputContext } from 'input-otp';</p>
+<p class="p1">import { Dot } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const InputOTP = React.forwardRef&lt;React.ElementRef&lt;typeof OTPInput&gt;, React.ComponentPropsWithoutRef&lt;typeof OTPInput&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, containerClassName, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;OTPInput</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>containerClassName={cn('flex items-center gap-2 has-[:disabled]:opacity-50', containerClassName)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn('disabled:cursor-not-allowed', className)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>)</p>
+<p class="p1">);</p>
+<p class="p1">InputOTP.displayName = 'InputOTP';</p>
+<p class="p2"><br></p>
+<p class="p1">const InputOTPGroup = React.forwardRef&lt;React.ElementRef&lt;'div'&gt;, React.ComponentPropsWithoutRef&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} className={cn('flex items-center', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">InputOTPGroup.displayName = 'InputOTPGroup';</p>
+<p class="p2"><br></p>
+<p class="p1">const InputOTPSlot = React.forwardRef&lt;React.ElementRef&lt;'div'&gt;, React.ComponentPropsWithoutRef&lt;'div'&gt; &amp; { index: number }&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ index, className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const inputOTPContext = React.useContext(OTPInputContext);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>isActive &amp;&amp; 'z-10 ring-2 ring-ring ring-offset-background',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{char}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{hasFakeCaret &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="pointer-events-none absolute inset-0 flex items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">InputOTPSlot.displayName = 'InputOTPSlot';</p>
+<p class="p2"><br></p>
+<p class="p1">const InputOTPSeparator = React.forwardRef&lt;React.ElementRef&lt;'div'&gt;, React.ComponentPropsWithoutRef&lt;'div'&gt;&gt;(({ ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} role="separator" {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Dot /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">));</p>
+<p class="p1">InputOTPSeparator.displayName = 'InputOTPSeparator';</p>
+<p class="p2"><br></p>
+<p class="p1">export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };</p>
+</body>
+</html>

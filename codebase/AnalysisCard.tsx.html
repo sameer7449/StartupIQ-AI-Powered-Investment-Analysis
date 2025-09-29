@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { TouchCard } from '@/components/TouchCard';</p>
+<p class="p1">import { CardContent, CardHeader, CardTitle } from '@/components/ui/card';</p>
+<p class="p1">import { Badge } from '@/components/ui/badge';</p>
+<p class="p1">import { Progress } from '@/components/ui/progress';</p>
+<p class="p1">import { Startup } from '@/lib/mockData';</p>
+<p class="p1">import { Building2, Calendar, MapPin, Users, DollarSign } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">interface AnalysisCardProps {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>startup: Startup;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>onClick?: () =&gt; void;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export default function AnalysisCard({ startup, onClick }: AnalysisCardProps) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const getRecommendationColor = (recommendation: string) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>switch (recommendation) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'Strong Buy': return 'bg-green-500 hover:bg-green-600';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'Buy': return 'bg-blue-500 hover:bg-blue-600';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'Hold': return 'bg-yellow-500 hover:bg-yellow-600';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'Pass': return 'bg-red-500 hover:bg-red-600';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>default: return 'bg-gray-500 hover:bg-gray-600';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const getRiskColor = (risk: string) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>switch (risk) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'Low': return 'bg-green-100 text-green-800';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'Medium': return 'bg-yellow-100 text-yellow-800';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>case 'High': return 'bg-red-100 text-red-800';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>default: return 'bg-gray-100 text-gray-800';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;TouchCard<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>interactive={true}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>onClick={onClick}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className="min-h-[280px] p-1"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;CardHeader className="pb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="flex justify-between items-start gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="min-w-0 flex-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;CardTitle className="text-lg md:text-xl truncate"&gt;{startup.name}&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p className="text-sm text-muted-foreground mt-1 line-clamp-2"&gt;{startup.description}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex flex-col items-end gap-2 flex-shrink-0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;Badge className={`${getRecommendationColor(startup.recommendation)} text-xs px-2 py-1`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{startup.recommendation}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/Badge&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;Badge variant="outline" className={`${getRiskColor(startup.riskLevel)} text-xs px-2 py-1`}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>{startup.riskLevel} Risk</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/Badge&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/CardHeader&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;CardContent className="space-y-4 pt-0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="flex items-center justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span className="text-sm font-medium"&gt;Overall Score&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span className="text-xl md:text-2xl font-bold"&gt;{startup.overallScore}/10&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Progress value={startup.overallScore * 10} className="h-3" /&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="grid grid-cols-2 gap-3 text-xs md:text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Building2 className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="truncate"&gt;{startup.industry}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Calendar className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="truncate"&gt;{startup.stage}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;MapPin className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="truncate"&gt;{startup.location}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Users className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="truncate"&gt;{startup.employees} employees&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;DollarSign className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="truncate"&gt;${(startup.fundingRaised / 1000000).toFixed(1)}M raised&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Calendar className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground flex-shrink-0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="truncate"&gt;Founded {startup.foundedYear}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="pt-2 border-t"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-xs text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Analyzed on {new Date(startup.analysisDate).toLocaleDateString()}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/TouchCard&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { useState } from 'react';</p>
+<p class="p1">import { TouchButton } from '@/components/TouchButton';</p>
+<p class="p1">import { TouchCard } from '@/components/TouchCard';</p>
+<p class="p1">import FeatureCard from '@/components/FeatureCard';</p>
+<p class="p1">import MarketDataModal from '@/components/MarketDataModal';</p>
+<p class="p1">import FeatureDetailModal from '@/components/FeatureDetailModal';</p>
+<p class="p1">import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';</p>
+<p class="p1">import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';</p>
+<p class="p1">import MetricsOverview from '@/components/MetricsOverview';</p>
+<p class="p1">import AnalysisCard from '@/components/AnalysisCard';</p>
+<p class="p1">import { mockStartups } from '@/lib/mockData';</p>
+<p class="p1">import { marketSuccessStories, featureDetails } from '@/lib/marketData';</p>
+<p class="p1">import { useNavigate } from 'react-router-dom';</p>
+<p class="p1">import { Plus, Brain, TrendingUp, Shield, Zap, BarChart3 } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">interface MarketData {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>title: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>companies: Array&lt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>name: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>industry: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>founded: number;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>valuation: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>employees: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>keyMetric: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>description: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>website?: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}&gt;;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">interface FeatureDetail {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>title: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>description: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>benefits: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>technicalSpecs: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useCases: string[];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>metrics: { label: string; value: number }[];</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export default function Index() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const navigate = useNavigate();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [recentAnalyses] = useState(mockStartups.slice(0, 3));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [marketModalOpen, setMarketModalOpen] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [featureModalOpen, setFeatureModalOpen] = useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [selectedMarketData, setSelectedMarketData] = useState&lt;MarketData&gt;({title: '', companies: []});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [selectedFeature, setSelectedFeature] = useState&lt;FeatureDetail | null&gt;(null);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const handleMarketData = (type: keyof typeof marketSuccessStories, title: string) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSelectedMarketData({ title, companies: marketSuccessStories[type] });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setMarketModalOpen(true);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const handleFeatureDetail = (type: keyof typeof featureDetails) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSelectedFeature(featureDetails[type]);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setFeatureModalOpen(true);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const handleTryFeature = (path: string) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setFeatureModalOpen(false);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>navigate(path);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{/* Header */}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="container mx-auto px-4 py-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex items-center justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center space-x-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="h-10 w-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Brain className="h-6 w-6 text-white" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>StartupIQ</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p className="text-sm text-muted-foreground"&gt;AI-Powered Investment Analysis&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex items-center space-x-2 md:space-x-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>onClick={() =&gt; navigate('/startups')}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>variant="outline"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>className="hidden sm:flex"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>View All Startups</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>onClick={() =&gt; navigate('/upload')}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Plus className="h-4 w-4 mr-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="hidden sm:inline"&gt;Analyze Startup&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="sm:hidden"&gt;Analyze&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;main className="container mx-auto px-4 py-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{/* Hero Section */}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="text-center mb-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Transform Startup Analysis with AI</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Synthesize founder materials and public data to generate actionable investment insights in minutes, not weeks.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;FeatureCard</p>
+<p class="p1"><span class="Apple-converted-space">              </span>icon={&lt;Zap className="h-12 w-12 mx-auto text-blue-600" /&gt;}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title="Lightning Fast"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>description="Get comprehensive startup analysis in under 5 minutes"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>examples={["Stripe", "Vercel", "Algolia"]}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onLearnMore={() =&gt; handleFeatureDetail('lightningFast')}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onTryNow={() =&gt; navigate('/upload')}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;FeatureCard</p>
+<p class="p1"><span class="Apple-converted-space">              </span>icon={&lt;Brain className="h-12 w-12 mx-auto text-indigo-600" /&gt;}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title="AI-Powered"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>description="Advanced algorithms analyze market, team, product, and financials"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>examples={["OpenAI", "Anthropic", "Scale AI"]}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onLearnMore={() =&gt; handleFeatureDetail('aiPowered')}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onTryNow={() =&gt; navigate('/upload')}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;FeatureCard</p>
+<p class="p1"><span class="Apple-converted-space">              </span>icon={&lt;Shield className="h-12 w-12 mx-auto text-green-600" /&gt;}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title="Data-Driven"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>description="Objective insights based on comprehensive data synthesis"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>examples={["Palantir", "Snowflake", "Databricks"]}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onLearnMore={() =&gt; handleFeatureDetail('dataDriven')}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onTryNow={() =&gt; navigate('/startups')}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>{/* Quick Action Buttons */}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={() =&gt; navigate('/upload')}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>size="lg"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 w-full sm:w-auto"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Plus className="h-5 w-5 mr-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Start Analysis</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={() =&gt; navigate('/startups')}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>variant="outline"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>size="lg"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="w-full sm:w-auto"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;TrendingUp className="h-5 w-5 mr-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>View Portfolio</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>{/* Dashboard Content */}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Tabs defaultValue="overview" className="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TabsList className="grid w-full grid-cols-2 max-w-md mx-auto h-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TabsTrigger value="overview" className="text-sm md:text-base"&gt;Overview&lt;/TabsTrigger&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TabsTrigger value="recent" className="text-sm md:text-base"&gt;Recent Analyses&lt;/TabsTrigger&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/TabsList&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TabsContent value="overview" className="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchCard<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="border-0 shadow-lg bg-white/80 backdrop-blur-sm"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>interactive={true}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={() =&gt; handleMarketData('platformMetrics', 'Platform Metrics')}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;CardTitle className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;TrendingUp className="h-5 w-5" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>Platform Metrics</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>variant="ghost"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>size="sm"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onClick={(e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>e.stopPropagation();</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>handleFeatureDetail('platformMetrics');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>View Details</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;CardDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>Key performance indicators for your investment analysis platform</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/CardDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;MetricsOverview /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="mt-4 flex gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>variant="outline"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>size="sm"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onClick={(e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>e.stopPropagation();</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>handleMarketData('platformMetrics', 'Platform Metrics');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;BarChart3 className="h-4 w-4 mr-1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Market Data</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchCard&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/TabsContent&gt;</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TabsContent value="recent" className="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchCard className="border-0 shadow-lg bg-white/80 backdrop-blur-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;CardTitle&gt;Recent Startup Analyses&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;CardDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>Latest startups analyzed by the AI engine</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/CardDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>{recentAnalyses.map((startup) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;AnalysisCard<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                      </span>key={startup.id}<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                      </span>startup={startup}</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>onClick={() =&gt; navigate(`/startup/${startup.id}`)}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="mt-6 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>variant="outline"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onClick={() =&gt; navigate('/startups')}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>View All Analyses</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchCard&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/TabsContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/Tabs&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>{/* Modals */}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;MarketDataModal</p>
+<p class="p1"><span class="Apple-converted-space">        </span>isOpen={marketModalOpen}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>onClose={() =&gt; setMarketModalOpen(false)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>title={selectedMarketData.title}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>companies={selectedMarketData.companies}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;FeatureDetailModal</p>
+<p class="p1"><span class="Apple-converted-space">        </span>isOpen={featureModalOpen}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>onClose={() =&gt; setFeatureModalOpen(false)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>feature={selectedFeature}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>onTryFeature={() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (selectedFeature?.title.includes('Lightning Fast') || selectedFeature?.title.includes('AI-Powered')) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>handleTryFeature('/upload');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>handleTryFeature('/startups');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { useState, useEffect } from 'react';</p>
+<p class="p1">import { useNavigate } from 'react-router-dom';</p>
+<p class="p1">import { TouchButton } from '@/components/TouchButton';</p>
+<p class="p1">import { TouchCard } from '@/components/TouchCard';</p>
+<p class="p1">import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';</p>
+<p class="p1">import { Input } from '@/components/ui/input';</p>
+<p class="p1">import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';</p>
+<p class="p1">import { Badge } from '@/components/ui/badge';</p>
+<p class="p1">import AnalysisCard from '@/components/AnalysisCard';</p>
+<p class="p1">import { mockStartups, Startup } from '@/lib/mockData';</p>
+<p class="p1">import { ArrowLeft, Search, Filter, Plus } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">export default function StartupList() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const navigate = useNavigate();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [startups, setStartups] = useState&lt;Startup[]&gt;([]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [filteredStartups, setFilteredStartups] = useState&lt;Startup[]&gt;([]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [searchTerm, setSearchTerm] = useState('');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [industryFilter, setIndustryFilter] = useState('all');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [stageFilter, setStageFilter] = useState('all');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [recommendationFilter, setRecommendationFilter] = useState('all');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Load startups from localStorage and combine with mock data</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const storedStartups = JSON.parse(localStorage.getItem('analyzedStartups') || '[]');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const allStartups = [...mockStartups, ...storedStartups];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setStartups(allStartups);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setFilteredStartups(allStartups);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, []);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let filtered = startups;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Search filter</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (searchTerm) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>filtered = filtered.filter(startup =&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>startup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||</p>
+<p class="p1"><span class="Apple-converted-space">        </span>startup.industry.toLowerCase().includes(searchTerm.toLowerCase()) ||</p>
+<p class="p1"><span class="Apple-converted-space">        </span>startup.description.toLowerCase().includes(searchTerm.toLowerCase())</p>
+<p class="p1"><span class="Apple-converted-space">      </span>);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Industry filter</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (industryFilter !== 'all') {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>filtered = filtered.filter(startup =&gt; startup.industry === industryFilter);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Stage filter</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (stageFilter !== 'all') {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>filtered = filtered.filter(startup =&gt; startup.stage === stageFilter);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Recommendation filter</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (recommendationFilter !== 'all') {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>filtered = filtered.filter(startup =&gt; startup.recommendation === recommendationFilter);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>setFilteredStartups(filtered);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [startups, searchTerm, industryFilter, stageFilter, recommendationFilter]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const uniqueIndustries = Array.from(new Set(startups.map(s =&gt; s.industry)));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const uniqueStages = Array.from(new Set(startups.map(s =&gt; s.stage)));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const uniqueRecommendations = Array.from(new Set(startups.map(s =&gt; s.recommendation)));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const clearFilters = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setSearchTerm('');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setIndustryFilter('all');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setStageFilter('all');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setRecommendationFilter('all');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;header className="border-b bg-white/80 backdrop-blur-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="container mx-auto px-4 py-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex items-center justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>variant="ghost"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={() =&gt; navigate('/')}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;ArrowLeft className="h-4 w-4 mr-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="hidden sm:inline"&gt;Back to Dashboard&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="sm:hidden"&gt;Back&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchButton&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>onClick={() =&gt; navigate('/upload')}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Plus className="h-4 w-4 mr-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="hidden sm:inline"&gt;Analyze New Startup&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span className="sm:hidden"&gt;Analyze&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;main className="container mx-auto px-4 py-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;h1 className="text-2xl md:text-3xl font-bold mb-4"&gt;Startup Portfolio&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;p className="text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Browse and filter through all analyzed startups in your portfolio</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>{/* Filters */}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;TouchCard className="mb-8 border-0 shadow-lg bg-white/80 backdrop-blur-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;CardTitle className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;Filter className="h-5 w-5" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Filters &amp; Search</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/CardTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;CardDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Filter startups by various criteria to find what you're looking for</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/CardDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/CardHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label className="text-sm font-medium"&gt;Search&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;Input</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>placeholder="Search startups..."</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>value={searchTerm}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onChange={(e) =&gt; setSearchTerm(e.target.value)}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>className="pl-10 h-12 text-base"</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label className="text-sm font-medium"&gt;Industry&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Select value={industryFilter} onValueChange={setIndustryFilter}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;SelectTrigger className="h-12 text-base"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SelectValue placeholder="All Industries" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/SelectTrigger&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;SelectContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SelectItem value="all"&gt;All Industries&lt;/SelectItem&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{uniqueIndustries.map(industry =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;SelectItem key={industry} value={industry}&gt;{industry}&lt;/SelectItem&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/SelectContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/Select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label className="text-sm font-medium"&gt;Stage&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Select value={stageFilter} onValueChange={setStageFilter}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;SelectTrigger className="h-12 text-base"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SelectValue placeholder="All Stages" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/SelectTrigger&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;SelectContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SelectItem value="all"&gt;All Stages&lt;/SelectItem&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{uniqueStages.map(stage =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;SelectItem key={stage} value={stage}&gt;{stage}&lt;/SelectItem&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/SelectContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/Select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label className="text-sm font-medium"&gt;Recommendation&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Select value={recommendationFilter} onValueChange={setRecommendationFilter}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;SelectTrigger className="h-12 text-base"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SelectValue placeholder="All Recommendations" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/SelectTrigger&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;SelectContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;SelectItem value="all"&gt;All Recommendations&lt;/SelectItem&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{uniqueRecommendations.map(rec =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;SelectItem key={rec} value={rec}&gt;{rec}&lt;/SelectItem&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/SelectContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/Select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span className="text-sm text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>Showing {filteredStartups.length} of {startups.length} startups</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{(searchTerm || industryFilter !== 'all' || stageFilter !== 'all' || recommendationFilter !== 'all') &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;TouchButton</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>variant="outline"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>size="sm"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onClick={clearFilters}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Clear Filters</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/TouchCard&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>{/* Startup Grid */}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{filteredStartups.length === 0 ? (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TouchCard className="border-0 shadow-lg bg-white/80 backdrop-blur-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;CardContent className="text-center py-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="text-muted-foreground mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Search className="h-12 w-12 mx-auto mb-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 className="text-lg font-semibold mb-2"&gt;No startups found&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;Try adjusting your search criteria or add a new startup to analyze.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;TouchButton<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>onClick={() =&gt; navigate('/upload')}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Plus className="h-4 w-4 mr-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Analyze New Startup</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/CardContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/TouchCard&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{filteredStartups.map((startup) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;AnalysisCard<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>key={startup.id}<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>startup={startup}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>onClick={() =&gt; navigate(`/startup/${startup.id}`)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+</body>
+</html>

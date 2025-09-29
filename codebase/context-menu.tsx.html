@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';</p>
+<p class="p1">import { Check, ChevronRight, Circle } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenu = ContextMenuPrimitive.Root;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuTrigger = ContextMenuPrimitive.Trigger;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuGroup = ContextMenuPrimitive.Group;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuPortal = ContextMenuPrimitive.Portal;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuSub = ContextMenuPrimitive.Sub;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuSubTrigger = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.SubTrigger&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.SubTrigger&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.SubTrigger</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset &amp;&amp; 'pl-8',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChevronRight className="ml-auto h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ContextMenuPrimitive.SubTrigger&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuSubContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.SubContent&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.SubContent&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.SubContent</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.Content&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.Content&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.Portal&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ContextMenuPrimitive.Content</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ContextMenuPrimitive.Portal&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuContent.displayName = ContextMenuPrimitive.Content.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.Item&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.Item&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.Item</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inset &amp;&amp; 'pl-8',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuCheckboxItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.CheckboxItem&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.CheckboxItem&gt;</p>
+<p class="p1">&gt;(({ className, children, checked, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.CheckboxItem</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>checked={checked}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ContextMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Check className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ContextMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ContextMenuPrimitive.CheckboxItem&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuCheckboxItem.displayName = ContextMenuPrimitive.CheckboxItem.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuRadioItem = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.RadioItem&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.RadioItem&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.RadioItem</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ContextMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;Circle className="h-2 w-2 fill-current" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ContextMenuPrimitive.ItemIndicator&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ContextMenuPrimitive.RadioItem&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuRadioItem.displayName = ContextMenuPrimitive.RadioItem.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuLabel = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.Label&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.Label&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, inset, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.Label</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn('px-2 py-1.5 text-sm font-semibold text-foreground', inset &amp;&amp; 'pl-8', className)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuLabel.displayName = ContextMenuPrimitive.Label.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuSeparator = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ContextMenuPrimitive.Separator&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ContextMenuPrimitive.Separator&gt;</p>
+<p class="p1">&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ContextMenuPrimitive.Separator ref={ref} className={cn('-mx-1 my-1 h-px bg-border', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ContextMenuShortcut = ({ className, ...props }: React.HTMLAttributes&lt;HTMLSpanElement&gt;) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;span className={cn('ml-auto text-xs tracking-widest text-muted-foreground', className)} {...props} /&gt;;</p>
+<p class="p1">};</p>
+<p class="p1">ContextMenuShortcut.displayName = 'ContextMenuShortcut';</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenu,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuCheckboxItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuRadioItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuLabel,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuSeparator,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuShortcut,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuGroup,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuPortal,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuSub,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuSubContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuSubTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ContextMenuRadioGroup,</p>
+<p class="p1">};</p>
+</body>
+</html>

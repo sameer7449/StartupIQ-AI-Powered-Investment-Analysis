@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { Card } from '@/components/ui/card';</p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p1">import { forwardRef } from 'react';</p>
+<p class="p2"><br></p>
+<p class="p1">interface TouchCardProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>children: React.ReactNode;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>interactive?: boolean;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">const TouchCard = forwardRef&lt;HTMLDivElement, TouchCardProps&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, children, interactive = false, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Card</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>// Base touch-friendly styling</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'touch-manipulation select-none',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>// Interactive cards get enhanced touch feedback</p>
+<p class="p1"><span class="Apple-converted-space">          </span>interactive &amp;&amp; [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'cursor-pointer transition-all duration-200',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'hover:shadow-lg hover:scale-[1.02]',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'active:scale-[0.98] active:shadow-md',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Better touch targets</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'min-h-[60px]'</p>
+<p class="p1"><span class="Apple-converted-space">          </span>],</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Card&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">TouchCard.displayName = 'TouchCard';</p>
+<p class="p2"><br></p>
+<p class="p1">export { TouchCard };</p>
+</body>
+</html>

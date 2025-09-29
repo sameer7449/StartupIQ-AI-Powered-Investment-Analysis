@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as RechartsPrimitive from 'recharts';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">// Format: { THEME_NAME: CSS_SELECTOR }</p>
+<p class="p1">const THEMES = { light: '', dark: '.dark' } as const;</p>
+<p class="p2"><br></p>
+<p class="p1">export type ChartConfig = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>[k in string]: {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label?: React.ReactNode;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>icon?: React.ComponentType;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} &amp; ({ color?: string; theme?: never } | { color?: never; theme: Record&lt;keyof typeof THEMES, string&gt; });</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">type ChartContextProps = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>config: ChartConfig;</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartContext = React.createContext&lt;ChartContextProps | null&gt;(null);</p>
+<p class="p2"><br></p>
+<p class="p1">function useChart() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const context = React.useContext(ChartContext);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!context) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>throw new Error('useChart must be used within a &lt;ChartContainer /&gt;');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return context;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartContainer = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLDivElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'div'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>config: ChartConfig;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>children: React.ComponentProps&lt;typeof RechartsPrimitive.ResponsiveContainer&gt;['children'];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ id, className, children, config, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const uniqueId = React.useId();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ChartContext.Provider value={{ config }}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-chart={chartId}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>"flex aspect-video justify-center text-xs [&amp;_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&amp;_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&amp;_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&amp;_.recharts-dot[stroke='#fff']]:stroke-transparent [&amp;_.recharts-layer]:outline-none [&amp;_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&amp;_.recharts-radial-bar-background-sector]:fill-muted [&amp;_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&amp;_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&amp;_.recharts-sector[stroke='#fff']]:stroke-transparent [&amp;_.recharts-sector]:outline-none [&amp;_.recharts-surface]:outline-none",</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;ChartStyle id={chartId} config={config} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;RechartsPrimitive.ResponsiveContainer&gt;{children}&lt;/RechartsPrimitive.ResponsiveContainer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ChartContext.Provider&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">ChartContainer.displayName = 'Chart';</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const colorConfig = Object.entries(config).filter(([_, config]) =&gt; config.theme || config.color);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!colorConfig.length) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style</p>
+<p class="p1"><span class="Apple-converted-space">      </span>dangerouslySetInnerHTML={{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>__html: Object.entries(THEMES)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.map(</p>
+<p class="p1"><span class="Apple-converted-space">            </span>([theme, prefix]) =&gt; `</p>
+<p class="p1">${prefix} [data-chart=${id}] {</p>
+<p class="p1">${colorConfig</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.map(([key, itemConfig]) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return color ? `<span class="Apple-converted-space">  </span>--color-${key}: ${color};` : null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>})</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.join('\n')}</p>
+<p class="p1">}</p>
+<p class="p1">`</p>
+<p class="p1"><span class="Apple-converted-space">          </span>)</p>
+<p class="p1"><span class="Apple-converted-space">          </span>.join('\n'),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartTooltip = RechartsPrimitive.Tooltip;</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartTooltipContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLDivElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;typeof RechartsPrimitive.Tooltip&gt; &amp;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>React.ComponentProps&lt;'div'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hideLabel?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hideIndicator?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>indicator?: 'line' | 'dot' | 'dashed';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>nameKey?: string;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labelKey?: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1">&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>active,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>payload,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>indicator = 'dot',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hideLabel = false,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hideIndicator = false,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>label,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labelFormatter,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labelClassName,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>formatter,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>nameKey,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labelKey,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref</p>
+<p class="p1"><span class="Apple-converted-space">  </span>) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { config } = useChart();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const tooltipLabel = React.useMemo(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (hideLabel || !payload?.length) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const [item] = payload;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const key = `${labelKey || item.dataKey || item.name || 'value'}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const itemConfig = getPayloadConfigFromPayload(config, item, key);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const value = !labelKey &amp;&amp; typeof label === 'string' ? config[label as keyof typeof config]?.label || label : itemConfig?.label;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (labelFormatter) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return &lt;div className={cn('font-medium', labelClassName)}&gt;{labelFormatter(value, payload)}&lt;/div&gt;;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!value) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>return &lt;div className={cn('font-medium', labelClassName)}&gt;{value}&lt;/div&gt;;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (!active || !payload?.length) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const nestLabel = payload.length === 1 &amp;&amp; indicator !== 'dot';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{!nestLabel ? tooltipLabel : null}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="grid gap-1.5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{payload.map((item, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const key = `${nameKey || item.name || item.dataKey || 'value'}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const itemConfig = getPayloadConfigFromPayload(config, item, key);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const indicatorColor = color || item.payload.fill || item.color;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">                </span>key={item.dataKey}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>'flex w-full flex-wrap items-stretch gap-2 [&amp;&gt;svg]:h-2.5 [&amp;&gt;svg]:w-2.5 [&amp;&gt;svg]:text-muted-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>indicator === 'dot' &amp;&amp; 'items-center'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{formatter &amp;&amp; item?.value !== undefined &amp;&amp; item.name ? (</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>formatter(item.value, item.name, item, index, item.payload)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{itemConfig?.icon ? (</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;itemConfig.icon /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>!hideIndicator &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>className={cn('shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]', {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'h-2.5 w-2.5': indicator === 'dot',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'w-1': indicator === 'line',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'w-0 border-[1.5px] border-dashed bg-transparent': indicator === 'dashed',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'my-0.5': nestLabel &amp;&amp; indicator === 'dashed',</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>})}</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>style={</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>'--color-bg': indicatorColor,</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>'--color-border': indicatorColor,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>} as React.CSSProperties</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>)</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className={cn('flex flex-1 justify-between leading-none', nestLabel ? 'items-end' : 'items-center')}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="grid gap-1.5"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>{nestLabel ? tooltipLabel : null}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span className="text-muted-foreground"&gt;{itemConfig?.label || item.name}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>{item.value &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span className="font-mono font-medium tabular-nums text-foreground"&gt;{item.value.toLocaleString()}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>})}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">ChartTooltipContent.displayName = 'ChartTooltip';</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartLegend = RechartsPrimitive.Legend;</p>
+<p class="p2"><br></p>
+<p class="p1">const ChartLegendContent = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLDivElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'div'&gt; &amp;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Pick&lt;RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hideIcon?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>nameKey?: string;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1">&gt;(({ className, hideIcon = false, payload, verticalAlign = 'bottom', nameKey }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { config } = useChart();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!payload?.length) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div ref={ref} className={cn('flex items-center justify-center gap-4', verticalAlign === 'top' ? 'pb-3' : 'pt-3', className)}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{payload.map((item) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const key = `${nameKey || item.dataKey || 'value'}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const itemConfig = getPayloadConfigFromPayload(config, item, key);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div key={item.value} className={cn('flex items-center gap-1.5 [&amp;&gt;svg]:h-3 [&amp;&gt;svg]:w-3 [&amp;&gt;svg]:text-muted-foreground')}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{itemConfig?.icon &amp;&amp; !hideIcon ? (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;itemConfig.icon /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">                </span>className="h-2 w-2 shrink-0 rounded-[2px]"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>style={{</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>backgroundColor: item.color,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{itemConfig?.label}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>})}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">ChartLegendContent.displayName = 'ChartLegend';</p>
+<p class="p2"><br></p>
+<p class="p1">// Helper to extract item config from a payload.</p>
+<p class="p1">function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key: string) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (typeof payload !== 'object' || payload === null) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return undefined;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const payloadPayload =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>'payload' in payload &amp;&amp; typeof payload.payload === 'object' &amp;&amp; payload.payload !== null ? payload.payload : undefined;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>let configLabelKey: string = key;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (key in payload &amp;&amp; typeof payload[key as keyof typeof payload] === 'string') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>configLabelKey = payload[key as keyof typeof payload] as string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else if (payloadPayload &amp;&amp; key in payloadPayload &amp;&amp; typeof payloadPayload[key as keyof typeof payloadPayload] === 'string') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>configLabelKey = payloadPayload[key as keyof typeof payloadPayload] as string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return configLabelKey in config ? config[configLabelKey] : config[key as keyof typeof config];</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle };</p>
+</body>
+</html>

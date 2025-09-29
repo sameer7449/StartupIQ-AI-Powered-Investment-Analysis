@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';</p>
+<p class="p1">import { ArrowLeft, ArrowRight } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p1">import { Button } from '@/components/ui/button';</p>
+<p class="p2"><br></p>
+<p class="p1">type CarouselApi = UseEmblaCarouselType[1];</p>
+<p class="p1">type UseCarouselParameters = Parameters&lt;typeof useEmblaCarousel&gt;;</p>
+<p class="p1">type CarouselOptions = UseCarouselParameters[0];</p>
+<p class="p1">type CarouselPlugin = UseCarouselParameters[1];</p>
+<p class="p2"><br></p>
+<p class="p1">type CarouselProps = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>opts?: CarouselOptions;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>plugins?: CarouselPlugin;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>orientation?: 'horizontal' | 'vertical';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setApi?: (api: CarouselApi) =&gt; void;</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">type CarouselContextProps = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>carouselRef: ReturnType&lt;typeof useEmblaCarousel&gt;[0];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>api: ReturnType&lt;typeof useEmblaCarousel&gt;[1];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>scrollPrev: () =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>scrollNext: () =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>canScrollPrev: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>canScrollNext: boolean;</p>
+<p class="p1">} &amp; CarouselProps;</p>
+<p class="p2"><br></p>
+<p class="p1">const CarouselContext = React.createContext&lt;CarouselContextProps | null&gt;(null);</p>
+<p class="p2"><br></p>
+<p class="p1">function useCarousel() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const context = React.useContext(CarouselContext);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!context) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>throw new Error('useCarousel must be used within a &lt;Carousel /&gt;');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return context;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">const Carousel = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; CarouselProps&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ orientation = 'horizontal', opts, setApi, plugins, className, children, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const [carouselRef, api] = useEmblaCarousel(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>...opts,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>axis: orientation === 'horizontal' ? 'x' : 'y',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>plugins</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const [canScrollPrev, setCanScrollPrev] = React.useState(false);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const [canScrollNext, setCanScrollNext] = React.useState(false);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const onSelect = React.useCallback((api: CarouselApi) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!api) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>setCanScrollPrev(api.canScrollPrev());</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setCanScrollNext(api.canScrollNext());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, []);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const scrollPrev = React.useCallback(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>api?.scrollPrev();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, [api]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const scrollNext = React.useCallback(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>api?.scrollNext();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, [api]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const handleKeyDown = React.useCallback(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>(event: React.KeyboardEvent&lt;HTMLDivElement&gt;) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (event.key === 'ArrowLeft') {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>scrollPrev();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else if (event.key === 'ArrowRight') {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>scrollNext();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[scrollPrev, scrollNext]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>React.useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!api || !setApi) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>setApi(api);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, [api, setApi]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>React.useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!api) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>onSelect(api);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>api.on('reInit', onSelect);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>api.on('select', onSelect);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>return () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>api?.off('select', onSelect);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, [api, onSelect]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;CarouselContext.Provider</p>
+<p class="p1"><span class="Apple-converted-space">        </span>value={{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>carouselRef,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>api: api,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>opts,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>scrollPrev,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>scrollNext,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>canScrollPrev,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>canScrollNext,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">          </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>onKeyDownCapture={handleKeyDown}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className={cn('relative', className)}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>role="region"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>aria-roledescription="carousel"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/CarouselContext.Provider&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">Carousel.displayName = 'Carousel';</p>
+<p class="p2"><br></p>
+<p class="p1">const CarouselContent = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { carouselRef, orientation } = useCarousel();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div ref={carouselRef} className="overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div ref={ref} className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)} {...props} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">CarouselContent.displayName = 'CarouselContent';</p>
+<p class="p2"><br></p>
+<p class="p1">const CarouselItem = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { orientation } = useCarousel();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>role="group"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>aria-roledescription="slide"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn('min-w-0 shrink-0 grow-0 basis-full', orientation === 'horizontal' ? 'pl-4' : 'pt-4', className)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">CarouselItem.displayName = 'CarouselItem';</p>
+<p class="p2"><br></p>
+<p class="p1">const CarouselPrevious = React.forwardRef&lt;HTMLButtonElement, React.ComponentProps&lt;typeof Button&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, variant = 'outline', size = 'icon', ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { orientation, scrollPrev, canScrollPrev } = useCarousel();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>variant={variant}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>size={size}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'absolute<span class="Apple-converted-space">  </span>h-8 w-8 rounded-full',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>orientation === 'horizontal' ? '-left-12 top-1/2 -translate-y-1/2' : '-top-12 left-1/2 -translate-x-1/2 rotate-90',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>disabled={!canScrollPrev}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>onClick={scrollPrev}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;ArrowLeft className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span className="sr-only"&gt;Previous slide&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">CarouselPrevious.displayName = 'CarouselPrevious';</p>
+<p class="p2"><br></p>
+<p class="p1">const CarouselNext = React.forwardRef&lt;HTMLButtonElement, React.ComponentProps&lt;typeof Button&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, variant = 'outline', size = 'icon', ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { orientation, scrollNext, canScrollNext } = useCarousel();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>variant={variant}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>size={size}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'absolute h-8 w-8 rounded-full',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>orientation === 'horizontal' ? '-right-12 top-1/2 -translate-y-1/2' : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>disabled={!canScrollNext}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>onClick={scrollNext}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;ArrowRight className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span className="sr-only"&gt;Next slide&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">CarouselNext.displayName = 'CarouselNext';</p>
+<p class="p2"><br></p>
+<p class="p1">export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };</p>
+</body>
+</html>

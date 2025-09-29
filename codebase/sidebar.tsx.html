@@ -1,0 +1,614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import { Slot } from '@radix-ui/react-slot';</p>
+<p class="p1">import { VariantProps, cva } from 'class-variance-authority';</p>
+<p class="p1">import { PanelLeft } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">import { useIsMobile } from '@/hooks/use-mobile';</p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p1">import { Button } from '@/components/ui/button';</p>
+<p class="p1">import { Input } from '@/components/ui/input';</p>
+<p class="p1">import { Separator } from '@/components/ui/separator';</p>
+<p class="p1">import { Sheet, SheetContent } from '@/components/ui/sheet';</p>
+<p class="p1">import { Skeleton } from '@/components/ui/skeleton';</p>
+<p class="p1">import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';</p>
+<p class="p2"><br></p>
+<p class="p1">const SIDEBAR_COOKIE_NAME = 'sidebar:state';</p>
+<p class="p1">const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;</p>
+<p class="p1">const SIDEBAR_WIDTH = '16rem';</p>
+<p class="p1">const SIDEBAR_WIDTH_MOBILE = '18rem';</p>
+<p class="p1">const SIDEBAR_WIDTH_ICON = '3rem';</p>
+<p class="p1">const SIDEBAR_KEYBOARD_SHORTCUT = 'b';</p>
+<p class="p2"><br></p>
+<p class="p1">type SidebarContext = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state: 'expanded' | 'collapsed';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>open: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setOpen: (open: boolean) =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>openMobile: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>setOpenMobile: (open: boolean) =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>isMobile: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>toggleSidebar: () =&gt; void;</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarContext = React.createContext&lt;SidebarContext | null&gt;(null);</p>
+<p class="p2"><br></p>
+<p class="p1">function useSidebar() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const context = React.useContext(SidebarContext);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!context) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>throw new Error('useSidebar must be used within a SidebarProvider.');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return context;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarProvider = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLDivElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'div'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>defaultOpen?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>open?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>onOpenChange?: (open: boolean) =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ defaultOpen = true, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const isMobile = useIsMobile();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [openMobile, setOpenMobile] = React.useState(false);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// This is the internal state of the sidebar.</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// We use openProp and setOpenProp for control from outside the component.</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const [_open, _setOpen] = React.useState(defaultOpen);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const open = openProp ?? _open;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const setOpen = React.useCallback(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>(value: boolean | ((value: boolean) =&gt; boolean)) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const openState = typeof value === 'function' ? value(open) : value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (setOpenProp) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setOpenProp(openState);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>_setOpen(openState);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// This sets the cookie to keep the sidebar state.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[setOpenProp, open]</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Helper to toggle the sidebar.</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const toggleSidebar = React.useCallback(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return isMobile ? setOpenMobile((open) =&gt; !open) : setOpen((open) =&gt; !open);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [isMobile, setOpen, setOpenMobile]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Adds a keyboard shortcut to toggle the sidebar.</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const handleKeyDown = (event: KeyboardEvent) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (event.key === SIDEBAR_KEYBOARD_SHORTCUT &amp;&amp; (event.metaKey || event.ctrlKey)) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>toggleSidebar();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>window.addEventListener('keydown', handleKeyDown);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return () =&gt; window.removeEventListener('keydown', handleKeyDown);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, [toggleSidebar]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// We add a state so that we can do data-state="expanded" or "collapsed".</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// This makes it easier to style the sidebar with Tailwind classes.</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const state = open ? 'expanded' : 'collapsed';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const contextValue = React.useMemo&lt;SidebarContext&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">    </span>() =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>open,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setOpen,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>isMobile,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>openMobile,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setOpenMobile,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>toggleSidebar,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;SidebarContext.Provider value={contextValue}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;TooltipProvider delayDuration={0}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">          </span>style={</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">              </span>'--sidebar-width': SIDEBAR_WIDTH,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>'--sidebar-width-icon': SIDEBAR_WIDTH_ICON,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>...style,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} as React.CSSProperties</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className={cn('group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar', className)}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/TooltipProvider&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/SidebarContext.Provider&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarProvider.displayName = 'SidebarProvider';</p>
+<p class="p2"><br></p>
+<p class="p1">const Sidebar = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLDivElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'div'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>side?: 'left' | 'right';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>variant?: 'sidebar' | 'floating' | 'inset';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>collapsible?: 'offcanvas' | 'icon' | 'none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ side = 'left', variant = 'sidebar', collapsible = 'offcanvas', className, children, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { isMobile, state, openMobile, setOpenMobile } = useSidebar();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (collapsible === 'none') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div className={cn('flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground', className)} ref={ref} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (isMobile) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;SheetContent</p>
+<p class="p1"><span class="Apple-converted-space">          </span>data-sidebar="sidebar"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>data-mobile="true"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&amp;&gt;button]:hidden"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>style={</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">              </span>'--sidebar-width': SIDEBAR_WIDTH_MOBILE,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} as React.CSSProperties</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>side={side}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div className="flex h-full w-full flex-col"&gt;{children}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/SheetContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Sheet&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className="group peer hidden md:block text-sidebar-foreground"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-state={state}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-collapsible={state === 'collapsed' ? collapsible : ''}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-variant={variant}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-side={side}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{/* This is what handles the sidebar gap on desktop */}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'group-data-[collapsible=offcanvas]:w-0',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'group-data-[side=right]:rotate-180',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>variant === 'floating' || variant === 'inset'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>: 'group-data-[collapsible=icon]:w-[--sidebar-width-icon]'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>side === 'left'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>: 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>// Adjust the padding for floating and inset variants.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>variant === 'floating' || variant === 'inset'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>: 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">          </span>data-sidebar="sidebar"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{children}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">Sidebar.displayName = 'Sidebar';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarTrigger = React.forwardRef&lt;React.ElementRef&lt;typeof Button&gt;, React.ComponentProps&lt;typeof Button&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, onClick, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const { toggleSidebar } = useSidebar();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Button</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-sidebar="trigger"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>variant="ghost"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>size="icon"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn('h-7 w-7', className)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>onClick={(event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>onClick?.(event);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>toggleSidebar();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;PanelLeft /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span className="sr-only"&gt;Toggle Sidebar&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/Button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">SidebarTrigger.displayName = 'SidebarTrigger';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarRail = React.forwardRef&lt;HTMLButtonElement, React.ComponentProps&lt;'button'&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { toggleSidebar } = useSidebar();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-sidebar="rail"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>aria-label="Toggle Sidebar"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>tabIndex={-1}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>onClick={toggleSidebar}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>title="Toggle Sidebar"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] hover:after:bg-sidebar-border group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'[[data-side=left]_&amp;]:cursor-w-resize [[data-side=right]_&amp;]:cursor-e-resize',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'[[data-side=left][data-state=collapsed]_&amp;]:cursor-e-resize [[data-side=right][data-state=collapsed]_&amp;]:cursor-w-resize',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full group-data-[collapsible=offcanvas]:hover:bg-sidebar',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'[[data-side=left][data-collapsible=offcanvas]_&amp;]:-right-2',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'[[data-side=right][data-collapsible=offcanvas]_&amp;]:-left-2',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarRail.displayName = 'SidebarRail';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarInset = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'main'&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'relative flex min-h-svh flex-1 flex-col bg-background',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarInset.displayName = 'SidebarInset';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarInput = React.forwardRef&lt;React.ElementRef&lt;typeof Input&gt;, React.ComponentProps&lt;typeof Input&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Input</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-sidebar="input"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn('h-8 w-full bg-background shadow-none focus-visible:ring-2 focus-visible:ring-sidebar-ring', className)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">SidebarInput.displayName = 'SidebarInput';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarHeader = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;div ref={ref} data-sidebar="header" className={cn('flex flex-col gap-2 p-2', className)} {...props} /&gt;;</p>
+<p class="p1">});</p>
+<p class="p1">SidebarHeader.displayName = 'SidebarHeader';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarFooter = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;div ref={ref} data-sidebar="footer" className={cn('flex flex-col gap-2 p-2', className)} {...props} /&gt;;</p>
+<p class="p1">});</p>
+<p class="p1">SidebarFooter.displayName = 'SidebarFooter';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarSeparator = React.forwardRef&lt;React.ElementRef&lt;typeof Separator&gt;, React.ComponentProps&lt;typeof Separator&gt;&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return &lt;Separator ref={ref} data-sidebar="separator" className={cn('mx-2 w-auto bg-sidebar-border', className)} {...props} /&gt;;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">SidebarSeparator.displayName = 'SidebarSeparator';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarContent = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-sidebar="content"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn('flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden', className)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarContent.displayName = 'SidebarContent';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarGroup = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return &lt;div ref={ref} data-sidebar="group" className={cn('relative flex w-full min-w-0 flex-col p-2', className)} {...props} /&gt;;</p>
+<p class="p1">});</p>
+<p class="p1">SidebarGroup.displayName = 'SidebarGroup';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarGroupLabel = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt; &amp; { asChild?: boolean }&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, asChild = false, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const Comp = asChild ? Slot : 'div';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Comp</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-sidebar="group-label"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'duration-200 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">SidebarGroupLabel.displayName = 'SidebarGroupLabel';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarGroupAction = React.forwardRef&lt;HTMLButtonElement, React.ComponentProps&lt;'button'&gt; &amp; { asChild?: boolean }&gt;(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>({ className, asChild = false, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const Comp = asChild ? Slot : 'button';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Comp</p>
+<p class="p1"><span class="Apple-converted-space">        </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-sidebar="group-action"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>// Increases the hit area of the button on mobile.</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'after:absolute after:-inset-2 after:md:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'group-data-[collapsible=icon]:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">          </span>className</p>
+<p class="p1"><span class="Apple-converted-space">        </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p1">SidebarGroupAction.displayName = 'SidebarGroupAction';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarGroupContent = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div ref={ref} data-sidebar="group-content" className={cn('w-full text-sm', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">SidebarGroupContent.displayName = 'SidebarGroupContent';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenu = React.forwardRef&lt;HTMLUListElement, React.ComponentProps&lt;'ul'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ul ref={ref} data-sidebar="menu" className={cn('flex w-full min-w-0 flex-col gap-1', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">SidebarMenu.displayName = 'SidebarMenu';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuItem = React.forwardRef&lt;HTMLLIElement, React.ComponentProps&lt;'li'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;li ref={ref} data-sidebar="menu-item" className={cn('group/menu-item relative', className)} {...props} /&gt;</p>
+<p class="p1">));</p>
+<p class="p1">SidebarMenuItem.displayName = 'SidebarMenuItem';</p>
+<p class="p2"><br></p>
+<p class="p1">const sidebarMenuButtonVariants = cva(</p>
+<p class="p1"><span class="Apple-converted-space">  </span>'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&amp;&gt;span:last-child]:truncate [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0',</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>variants: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>variant: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>default: 'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>outline:</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>size: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>default: 'h-8 text-sm',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>sm: 'h-7 text-xs',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lg: 'h-12 text-sm group-data-[collapsible=icon]:!p-0',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>defaultVariants: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>variant: 'default',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>size: 'default',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">);</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuButton = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLButtonElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'button'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>asChild?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>isActive?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tooltip?: string | React.ComponentProps&lt;typeof TooltipContent&gt;;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} &amp; VariantProps&lt;typeof sidebarMenuButtonVariants&gt;</p>
+<p class="p1">&gt;(({ asChild = false, isActive = false, variant = 'default', size = 'default', tooltip, className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const Comp = asChild ? Slot : 'button';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const { isMobile, state } = useSidebar();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const button = (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Comp</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-sidebar="menu-button"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-size={size}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-active={isActive}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(sidebarMenuButtonVariants({ variant, size }), className)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!tooltip) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return button;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (typeof tooltip === 'string') {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tooltip = {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>children: tooltip,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Tooltip&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;TooltipTrigger asChild&gt;{button}&lt;/TooltipTrigger&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;TooltipContent side="right" align="center" hidden={state !== 'collapsed' || isMobile} {...tooltip} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Tooltip&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarMenuButton.displayName = 'SidebarMenuButton';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuAction = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLButtonElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'button'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>asChild?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>showOnHover?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, asChild = false, showOnHover = false, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const Comp = asChild ? Slot : 'button';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Comp</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-sidebar="menu-action"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'absolute right-1 top-1.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 peer-hover/menu-button:text-sidebar-accent-foreground [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Increases the hit area of the button on mobile.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'after:absolute after:-inset-2 after:md:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'peer-data-[size=sm]/menu-button:top-1',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'peer-data-[size=default]/menu-button:top-1.5',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'peer-data-[size=lg]/menu-button:top-2.5',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'group-data-[collapsible=icon]:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>showOnHover &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 peer-data-[active=true]/menu-button:text-sidebar-accent-foreground md:opacity-0',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarMenuAction.displayName = 'SidebarMenuAction';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuBadge = React.forwardRef&lt;HTMLDivElement, React.ComponentProps&lt;'div'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>data-sidebar="menu-badge"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums text-sidebar-foreground select-none pointer-events-none',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'peer-data-[size=sm]/menu-button:top-1',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'peer-data-[size=default]/menu-button:top-1.5',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'peer-data-[size=lg]/menu-button:top-2.5',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'group-data-[collapsible=icon]:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">SidebarMenuBadge.displayName = 'SidebarMenuBadge';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuSkeleton = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLDivElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'div'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>showIcon?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ className, showIcon = false, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Random width between 50 to 90%.</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const width = React.useMemo(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return `${Math.floor(Math.random() * 40) + 50}%`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}, []);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div ref={ref} data-sidebar="menu-skeleton" className={cn('rounded-md h-8 flex gap-2 px-2 items-center', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{showIcon &amp;&amp; &lt;Skeleton className="size-4 rounded-md" data-sidebar="menu-skeleton-icon" /&gt;}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;Skeleton</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className="h-4 flex-1 max-w-[--skeleton-width]"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data-sidebar="menu-skeleton-text"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>style={</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'--skeleton-width': width,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>} as React.CSSProperties</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarMenuSkeleton.displayName = 'SidebarMenuSkeleton';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuSub = React.forwardRef&lt;HTMLUListElement, React.ComponentProps&lt;'ul'&gt;&gt;(({ className, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ul</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>data-sidebar="menu-sub"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-sidebar-border px-2.5 py-0.5',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'group-data-[collapsible=icon]:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p1">));</p>
+<p class="p1">SidebarMenuSub.displayName = 'SidebarMenuSub';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuSubItem = React.forwardRef&lt;HTMLLIElement, React.ComponentProps&lt;'li'&gt;&gt;(({ ...props }, ref) =&gt; &lt;li ref={ref} {...props} /&gt;);</p>
+<p class="p1">SidebarMenuSubItem.displayName = 'SidebarMenuSubItem';</p>
+<p class="p2"><br></p>
+<p class="p1">const SidebarMenuSubButton = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>HTMLAnchorElement,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentProps&lt;'a'&gt; &amp; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>asChild?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>size?: 'sm' | 'md';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>isActive?: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&gt;(({ asChild = false, size = 'md', isActive, className, ...props }, ref) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const Comp = asChild ? Slot : 'a';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Comp</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-sidebar="menu-sub-button"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-size={size}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data-active={isActive}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&amp;&gt;span:last-child]:truncate [&amp;&gt;svg]:size-4 [&amp;&gt;svg]:shrink-0 [&amp;&gt;svg]:text-sidebar-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>size === 'sm' &amp;&amp; 'text-xs',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>size === 'md' &amp;&amp; 'text-sm',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'group-data-[collapsible=icon]:hidden',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>className</p>
+<p class="p1"><span class="Apple-converted-space">      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">});</p>
+<p class="p1">SidebarMenuSubButton.displayName = 'SidebarMenuSubButton';</p>
+<p class="p2"><br></p>
+<p class="p1">export {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Sidebar,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarFooter,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarGroup,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarGroupAction,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarGroupContent,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarGroupLabel,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarHeader,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarInput,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarInset,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenu,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuAction,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuBadge,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuButton,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuSkeleton,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuSub,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuSubButton,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarMenuSubItem,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarProvider,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarRail,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarSeparator,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>SidebarTrigger,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>useSidebar,</p>
+<p class="p1">};</p>
+</body>
+</html>

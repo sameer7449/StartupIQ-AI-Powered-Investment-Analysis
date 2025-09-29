@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';</p>
+<p class="p1">import { TouchButton } from '@/components/TouchButton';</p>
+<p class="p1">import { Badge } from '@/components/ui/badge';</p>
+<p class="p1">import { Progress } from '@/components/ui/progress';</p>
+<p class="p1">import { TrendingUp, DollarSign, Users, Calendar, ExternalLink } from 'lucide-react';</p>
+<p class="p2"><br></p>
+<p class="p1">interface CompanySuccess {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>name: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>industry: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>founded: number;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>valuation: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>employees: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>keyMetric: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>description: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>website?: string;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">interface MarketDataModalProps {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>isOpen: boolean;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>onClose: () =&gt; void;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>title: string;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>companies: CompanySuccess[];</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">export default function MarketDataModal({ isOpen, onClose, title, companies }: MarketDataModalProps) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;Dialog open={isOpen} onOpenChange={onClose}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;DialogHeader&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;DialogTitle className="text-xl md:text-2xl flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;TrendingUp className="h-6 w-6 text-green-600" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{title} - Market Success Stories</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/DialogTitle&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;DialogDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Learn how major companies achieved success with similar technologies and approaches</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/DialogDescription&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/DialogHeader&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="grid gap-6 md:grid-cols-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>{companies.map((company, index) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div key={index} className="border rounded-lg p-4 space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="flex items-start justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;h3 className="text-lg font-semibold"&gt;{company.name}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;Badge variant="outline" className="text-xs mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{company.industry}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/Badge&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{company.website &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;TouchButton</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>variant="ghost"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>size="sm"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onClick={() =&gt; window.open(`https://${company.website}`, '_blank')}</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ExternalLink className="h-4 w-4" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">              </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;p className="text-sm text-muted-foreground"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{company.description}</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">              </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="grid grid-cols-2 gap-4 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;Calendar className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Founded {company.founded}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;DollarSign className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;{company.valuation}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;Users className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;{company.employees}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex items-center gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;TrendingUp className="h-4 w-4 text-muted-foreground" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;{company.keyMetric}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">              </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="pt-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="text-xs text-muted-foreground mb-1"&gt;Market Impact&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;Progress value={85 + index * 5} className="h-2" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div className="flex justify-end pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;TouchButton onClick={onClose} variant="outline"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Close</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/TouchButton&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/DialogContent&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/Dialog&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>);</p>
+<p class="p1">}</p>
+</body>
+</html>

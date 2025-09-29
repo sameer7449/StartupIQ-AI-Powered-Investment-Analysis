@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">import * as React from 'react';</p>
+<p class="p1">import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';</p>
+<p class="p2"><br></p>
+<p class="p1">import { cn } from '@/lib/utils';</p>
+<p class="p2"><br></p>
+<p class="p1">const ScrollArea = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ScrollAreaPrimitive.Root&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ScrollAreaPrimitive.Root&gt;</p>
+<p class="p1">&gt;(({ className, children, ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ScrollAreaPrimitive.Root ref={ref} className={cn('relative overflow-hidden', className)} {...props}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]"&gt;{children}&lt;/ScrollAreaPrimitive.Viewport&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ScrollBar /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ScrollAreaPrimitive.Corner /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ScrollAreaPrimitive.Root&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">const ScrollBar = React.forwardRef&lt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ElementRef&lt;typeof ScrollAreaPrimitive.ScrollAreaScrollbar&gt;,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>React.ComponentPropsWithoutRef&lt;typeof ScrollAreaPrimitive.ScrollAreaScrollbar&gt;</p>
+<p class="p1">&gt;(({ className, orientation = 'vertical', ...props }, ref) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;ScrollAreaPrimitive.ScrollAreaScrollbar</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ref={ref}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>orientation={orientation}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>className={cn(</p>
+<p class="p1"><span class="Apple-converted-space">      </span>'flex touch-none select-none transition-colors',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>orientation === 'vertical' &amp;&amp; 'h-full w-2.5 border-l border-l-transparent p-[1px]',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>orientation === 'horizontal' &amp;&amp; 'h-2.5 flex-col border-t border-t-transparent p-[1px]',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>className</p>
+<p class="p1"><span class="Apple-converted-space">    </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{...props}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/ScrollAreaPrimitive.ScrollAreaScrollbar&gt;</p>
+<p class="p1">));</p>
+<p class="p1">ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;</p>
+<p class="p2"><br></p>
+<p class="p1">export { ScrollArea, ScrollBar };</p>
+</body>
+</html>
